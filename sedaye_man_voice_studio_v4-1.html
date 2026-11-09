@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1425"><title>صدای من ۴ | استودیوی ضبط و پردازش صدا</title>
+<style>
+:root{--bg:#0b1425;--p:#14233a;--p2:#1a2d49;--line:#2b4262;--t:#edf4ff;--m:#9db0ca;--g:#35d6a1;--b:#72aaff;--y:#ffd17c;--r:#ff7984}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 80% -15%,#203e68,transparent 48%),var(--bg);color:var(--t);font-family:Tahoma,Arial,sans-serif;line-height:1.75}.wrap{max-width:900px;margin:auto;padding:14px 12px 42px}.hero{text-align:center;padding:18px 8px}.logo{width:60px;height:60px;border-radius:19px;background:linear-gradient(145deg,#24528a,#122846);display:grid;place-items:center;margin:auto;border:1px solid #426b9c;font-size:29px}.hero h1{margin:7px 0 0;font-size:24px}.hero p{margin:0;color:var(--m);font-size:12px}.tabs{display:flex;gap:7px;background:#0b192d;padding:6px;border:1px solid var(--line);border-radius:14px;margin:12px 0}.tab{flex:1;padding:11px 5px;border:0;border-radius:10px;background:none;color:var(--m);font:inherit;font-size:13px;font-weight:bold}.tab.active{background:#24466f;color:white}.panel{background:linear-gradient(155deg,#172943,#111e32);border:1px solid var(--line);border-radius:17px;padding:15px;margin:12px 0}.panel h2{font-size:16px;margin:0 0 9px}.muted,.help{color:var(--m);font-size:12px}.help{margin:5px 0 12px}.notice{padding:11px 12px;border-radius:10px;background:#132e43;border-right:3px solid var(--b);font-size:12px;color:#d4e7ff;margin:10px 0}.warning{background:#382e1b;border-color:var(--y);color:#ffe6b6}.danger{background:#3b202b;border-color:var(--r);color:#ffd8dc}label{display:block;font-size:13px;margin:10px 0 5px}input[type=text],input[type=password],textarea,select{width:100%;background:#0c192b;color:var(--t);border:1px solid var(--line);border-radius:10px;padding:11px;font:inherit}textarea{min-height:120px;resize:vertical}input[type=file]{width:100%;font-size:12px;color:var(--m)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.btn{border:1px solid #405f84;background:#203a5b;color:white;border-radius:11px;padding:10px 13px;font:inherit;font-size:13px;font-weight:bold;cursor:pointer}.btn.primary{background:linear-gradient(135deg,#159a78,#08775e);border-color:#22b78e}.btn:disabled{opacity:.45}.presets{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.preset{background:#10213a;color:var(--t);border:1px solid var(--line);border-radius:11px;padding:9px 6px;text-align:center;font:inherit;font-size:12px}.preset small{display:block;color:var(--m);font-size:10px}.preset.sel{border-color:var(--g);background:#12372f}.subhead{font-size:13px;color:#cfe2fa;margin:15px 0 4px}.tiny{font-size:11px;color:var(--m);margin:4px 0 8px}.control{margin:12px 0}.ctrlhead{display:flex;justify-content:space-between;font-size:12px}.ctrlhead output{color:var(--g)}input[type=range]{width:100%;accent-color:var(--g)}.status{min-height:22px;color:var(--m);font-size:12px;margin-top:9px;white-space:pre-wrap}.hidden{display:none!important}audio{width:100%;margin-top:12px}.foot{text-align:center;color:#7386a2;font-size:11px;padding:18px 5px}@media(max-width:520px){.grid{grid-template-columns:1fr}.presets{grid-template-columns:repeat(2,1fr)}.panel{padding:13px}}
+</style></head>
+<body><main class="wrap">
+<header class="hero"><div class="logo">♫</div><h1>صدای من ۴</h1><p>استودیوی ضبط، ویرایش و پردازش صدای فارسی</p></header>
+<nav class="tabs"><button class="tab active" data-page="local">پردازش آفلاین</button><button class="tab" data-page="ai">هوش مصنوعی فارسی</button></nav>
+
+<section id="local">
+ <div class="panel"><h2>🎙 ضبط مستقیم صدای خودت</h2><p class="help">با اجازه میکروفون گوشی یا کامپیوتر، همین‌جا صحبت کن. پس از توقف، ضبط برای پردازش آفلاین انتخاب می‌شود و می‌توانی فایل خام را هم ذخیره کنی.</p>
+ <div class="row"><button class="btn primary" id="recStart">● شروع ضبط</button><button class="btn" id="recStop" disabled>■ توقف ضبط</button><button class="btn" id="recSave" disabled>⬇ ذخیره صدای خام WAV</button></div>
+ <div id="recStatus" class="status">آماده ضبط؛ برای شروع، اجازه دسترسی به میکروفون را بده.</div><audio id="recPlayer" controls class="hidden"></audio>
+ </div>
+ <div class="panel"><h2>پردازش محلی فایل صوتی</h2><p class="help">این قسمت بدون ارسال فایل به اینترنت، در مرورگر پردازش می‌شود. فایل ضبط‌شده بالا نیز خودکار در همین بخش قرار می‌گیرد.</p>
+ <label>انتخاب فایل صوتی</label><input id="localFile" type="file" accept="audio/*"><div id="localInfo" class="status">فایلی انتخاب نشده است.</div>
+ <div class="grid">
+  <div class="control"><div class="ctrlhead"><label for="lpitch">زیر و بمی صدا</label><output id="lpitchv">۰ نیم‌پرده</output></div><input id="lpitch" type="range" min="-5" max="5" step=".5" value="0"><div class="tiny">تغییر زیر و بمی با این روش، مدت پخش را هم کمی تغییر می‌دهد.</div></div>
+  <div class="control"><div class="ctrlhead"><label for="lspeed">سرعت گفتار</label><output id="lspeedv">۱٫۰۰×</output></div><input id="lspeed" type="range" min=".8" max="1.2" step=".01" value="1"></div>
+  <div class="control"><div class="ctrlhead"><label for="lbass">بم و گرمی صدا</label><output id="lbassv">۰ dB</output></div><input id="lbass" type="range" min="-12" max="12" value="0"></div>
+  <div class="control"><div class="ctrlhead"><label for="lpresence">وضوح و حضور صدا</label><output id="lpresencev">۰ dB</output></div><input id="lpresence" type="range" min="-9" max="12" value="0"></div>
+  <div class="control"><div class="ctrlhead"><label for="ltreble">شفافیت و زیرصدا</label><output id="ltreblev">۰ dB</output></div><input id="ltreble" type="range" min="-9" max="9" value="0"></div>
+  <div class="control"><div class="ctrlhead"><label for="lecho">اکو / بازتاب</label><output id="lechov">۰٪</output></div><input id="lecho" type="range" min="0" max="55" value="0"></div>
+  <div class="control"><div class="ctrlhead"><label for="lreverb">طنین محیطی</label><output id="lreverbv">۰٪</output></div><input id="lreverb" type="range" min="0" max="55" value="0"></div>
+  <div class="control"><div class="ctrlhead"><label for="ldrive">فشرده‌سازی و قدرت صدا</label><output id="ldrivev">۰٪</output></div><input id="ldrive" type="range" min="0" max="80" value="0"></div>
+ </div>
+ <div class="subhead">پروفایل‌های آماده پردازش</div><div class="presets" id="localPresets">
+  <button class="preset sel" data-preset="neutral">طبیعی و متعادل<small>صدای روزمره</small></button>
+  <button class="preset" data-preset="news">گوینده خبری<small>شفاف و محکم</small></button>
+  <button class="preset" data-preset="doc">مستند و روایت<small>گرم و عمیق</small></button>
+  <button class="preset" data-preset="warm">گرم و صمیمی<small>نرم و نزدیک</small></button>
+  <button class="preset" data-preset="bright">شفاف و پرانرژی<small>حضور بیشتر</small></button>
+  <button class="preset" data-preset="cinema">سینمایی<small>طنین و عمق بیشتر</small></button>
+ </div>
+ <div class="row"><button class="btn primary" id="lplay" disabled>▶ پخش پردازش‌شده</button><button class="btn" id="lexport" disabled>⬇ ذخیره WAV</button><button class="btn" id="lstop" disabled>توقف</button></div><div id="lstatus" class="status">برای شروع فایل انتخاب کن.</div><audio id="lplayer" controls class="hidden"></audio>
+ </div>
+ <div class="notice warning">پردازش آفلاین، صدای فایل را با افکت تغییر می‌دهد؛ تبدیل عصبی هویت گوینده در این بخش انجام نمی‌شود.</div>
+</section>
+
+<section id="ai" class="hidden">
+ <div class="panel"><h2>اتصال موتور گفتار فارسی</h2><p class="help">این نسخه از API فارسی Chatterbox روی BadunoAI استفاده می‌کند. طبق مستندات آن، تولید WAV فارسی، نمونه صدای مرجع و کنترل شدت بیان پشتیبانی می‌شود.</p>
+ <label for="apiKey">کلید API</label><input id="apiKey" type="password" autocomplete="off" placeholder="کلید API را اینجا وارد کن">
+ <div class="notice warning"><b>امنیت و هزینه:</b> کلید فقط تا زمان باز بودن همین صفحه در حافظه نگه داشته می‌شود و در فایل ذخیره نمی‌شود؛ با این حال چون درخواست از مرورگر ارسال می‌شود، این روش برای کلید حساس یا استفاده عمومی امن نیست. سرویس طبق مستندات، اعتباری و پولی است و حداقل موجودی ۲۰۰ توکن می‌خواهد. پیش از استفاده، شرایط و قیمت را در سایت ارائه‌دهنده بررسی کن.</div>
+ <div class="row"><button class="btn" id="health">بررسی اتصال سرویس</button><span id="healthStatus" class="status"></span></div>
+ </div>
+ <div class="panel"><h2>حالت اول: متن فارسی به گفتار طبیعی</h2>
+ <label for="aiText">متن فارسی</label><textarea id="aiText" maxlength="5000" placeholder="متن فارسی را وارد کن..."></textarea><div class="muted" id="count">۰ / ۵۰۰۰</div>
+ <label>شخصیت و احساس اجرا</label><div class="presets" id="emotions">
+  <button class="preset sel" data-ex="0.25" data-cfg="0.55">آرام و طبیعی<small>بیان کنترل‌شده</small></button>
+  <button class="preset" data-ex="0.45" data-cfg="0.5">مهربان و گرم<small>ملایم</small></button>
+  <button class="preset" data-ex="0.65" data-cfg="0.45">پرشور و هیجانی<small>بیان قوی‌تر</small></button>
+  <button class="preset" data-ex="0.55" data-cfg="0.6">جدی و رسمی<small>کنترل‌شده</small></button>
+  <button class="preset" data-ex="0.7" data-cfg="0.4">روایی و نمایشی<small>بیان برجسته</small></button>
+  <button class="preset" data-ex="0.35" data-cfg="0.65">نرم و صمیمی<small>بیان ملایم</small></button>
+ </div>
+ <div class="control"><div class="ctrlhead"><label for="exaggeration">شدت بیان احساسی</label><output id="exv">۰٫۲۵</output></div><input id="exaggeration" type="range" min="0" max="1" step=".05" value=".25"></div>
+ <div class="control"><div class="ctrlhead"><label for="cfg">تنظیم کیفیت / تنوع</label><output id="cfgv">۰٫۵۵</output></div><input id="cfg" type="range" min="0" max="1" step=".05" value=".55"></div>
+ <button class="btn primary" id="generate">✦ تولید صدای فارسی</button><div id="ttsStatus" class="status">برای تولید، کلید API و متن لازم است.</div><audio id="aiPlayer" controls class="hidden"></audio><div class="row"><button class="btn hidden" id="downloadAi">دانلود فایل WAV</button></div>
+ </div>
+ <div class="panel"><h2>حالت دوم: بازتولید گفتار با صدای مرجع خودت</h2>
+ <p class="help">فایل گفتار اصلی را برای استخراج متن انتخاب کن؛ یک نمونه تمیز از صدای خودت هم به‌عنوان مرجع صدا بده. سامانه گفتار را به متن تبدیل می‌کند و متن را با صدای مرجع بازتولید می‌کند. این کار Voice Conversion لحظه‌به‌لحظه نیست و مکث‌ها و اجرای دقیق نسخه اصلی ممکن است حفظ نشوند.</p>
+ <label>فایل گفتار اصلی برای استخراج متن</label><input id="sourceAudio" type="file" accept="audio/*">
+ <label>نمونه صدای مرجع (ترجیحاً WAV تمیز و ۶ تا ۱۵ ثانیه)</label><input id="referenceAudio" type="file" accept="audio/*">
+ <div class="control"><div class="ctrlhead"><label for="cloneEx">شدت بیان</label><output id="cloneExv">۰٫۵۰</output></div><input id="cloneEx" type="range" min="0" max="1" step=".05" value=".5"></div>
+ <button class="btn primary" id="clone">استخراج متن و بازتولید با صدای مرجع</button><div id="cloneStatus" class="status"></div><audio id="clonePlayer" controls class="hidden"></audio><button class="btn hidden" id="downloadClone">دانلود خروجی WAV</button>
+ </div>
+ <div class="notice danger">فایل صوتی و متن برای پردازش به سرویس آنلاین فرستاده می‌شوند. فقط صدایی را به‌عنوان مرجع استفاده کن که متعلق به خودت است یا برای استفاده از آن اجازه داری.</div>
+</section>
+<footer class="foot">صدای من ۳ · پردازش محلی پیشرفته + موتور گفتار فارسی</footer>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id), fa=n=>String(n).replace(/\d/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));$('local').classList.toggle('hidden',b.dataset.page!=='local');$('ai').classList.toggle('hidden',b.dataset.page!=='ai')});
+let key='';$('apiKey').addEventListener('input',e=>key=e.target.value.trim());
+const API='https://www.baduno.ai';
+function auth(){if(!key)throw Error('ابتدا کلید API را وارد کن.');return {'X-API-Key':key}}
+async function apiFetch(url,opts){let r;try{r=await fetch(url,opts)}catch(e){throw Error('ارتباط برقرار نشد. ممکن است اینترنت، CORS یا دسترسی سرویس مانع شده باشد.')}if(!r.ok){let t=await r.text();throw Error('خطای سرویس ('+r.status+'): '+t.slice(0,300))}return r}
+$('health').onclick=async()=>{try{$('healthStatus').textContent='در حال بررسی...';let r=await apiFetch(API+'/api/tts/health',{headers:auth()});let j=await r.json();$('healthStatus').textContent='پاسخ سرویس: '+JSON.stringify(j).slice(0,250)}catch(e){$('healthStatus').textContent=e.message}};
+let emotion={ex:.25,cfg:.55};document.querySelectorAll('#emotions .preset').forEach(b=>b.onclick=()=>{document.querySelectorAll('#emotions .preset').forEach(x=>x.classList.toggle('sel',x===b));emotion={ex:+b.dataset.ex,cfg:+b.dataset.cfg};$('exaggeration').value=emotion.ex;$('cfg').value=emotion.cfg;updateRanges()});
+function updateRanges(){$('exv').textContent=fa((+$('exaggeration').value).toFixed(2));$('cfgv').textContent=fa((+$('cfg').value).toFixed(2));$('cloneExv').textContent=fa((+$('cloneEx').value).toFixed(2))}
+['exaggeration','cfg','cloneEx'].forEach(id=>$(id).oninput=updateRanges);
+$('aiText').oninput=()=>$('count').textContent=fa($('aiText').value.length)+' / ۵۰۰۰';
+let lastWav=null;
+function showAudio(audioId,blob,downloadId){let u=URL.createObjectURL(blob);$(audioId).src=u;$(audioId).classList.remove('hidden');$(downloadId).classList.remove('hidden');$(downloadId).onclick=()=>{let a=document.createElement('a');a.href=u;a.download='sedaye-man-persian.wav';a.click()};lastWav=blob}
+function b64ToBlob(b64,type){let s=atob(b64),a=new Uint8Array(s.length);for(let i=0;i<s.length;i++)a[i]=s.charCodeAt(i);return new Blob([a],{type})}
+async function fileToWavBase64(file){const ctx=new (window.AudioContext||window.webkitAudioContext)();let ab=await file.arrayBuffer(),buf=await ctx.decodeAudioData(ab);let sr=24000,ch=1,len=buf.duration*sr,offline=new OfflineAudioContext(1,Math.ceil(len),sr),src=offline.createBufferSource();src.buffer=buf;src.connect(offline.destination);src.start();let out=await offline.startRendering(),samples=out.getChannelData(0);let pcm=new ArrayBuffer(44+samples.length*2),v=new DataView(pcm);const str=(o,s)=>{for(let i=0;i<s.length;i++)v.setUint8(o+i,s.charCodeAt(i))};str(0,'RIFF');v.setUint32(4,36+samples.length*2,true);str(8,'WAVE');str(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);str(36,'data');v.setUint32(40,samples.length*2,true);for(let i=0,o=44;i<samples.length;i++,o+=2){let x=Math.max(-1,Math.min(1,samples[i]));v.setInt16(o,x<0?x*32768:x*32767,true)}await ctx.close();let bytes=new Uint8Array(pcm),bin='';for(let i=0;i<bytes.length;i+=0x8000)bin+=String.fromCharCode(...bytes.subarray(i,i+0x8000));return btoa(bin)}
+async function tts(text,voiceRef,ex,cfg,statusId,playerId,downloadId){let body={text,exaggeration:ex,cfg_weight:cfg};if(voiceRef)body.voice_ref=voiceRef;$(statusId).textContent='در حال تولید صدای فارسی... لطفاً صبر کن.';let r=await apiFetch(API+'/api/tts/generate',{method:'POST',headers:{...auth(),'Content-Type':'application/json'},body:JSON.stringify(body)});let j=await r.json();if(!j.success||!j.audio)throw Error('پاسخ سرویس صوتی معتبر نیست.');let blob=b64ToBlob(j.audio,'audio/wav');showAudio(playerId,blob,downloadId);$(statusId).textContent='تولید انجام شد · مدت: '+fa((j.duration_ms/1000).toFixed(1))+' ثانیه · اعتبار مصرف‌شده: '+fa(j.tokens_used??'نامشخص')+' توکن.'}
+$('generate').onclick=async()=>{try{let text=$('aiText').value.trim();if(!text)throw Error('متن فارسی را وارد کن.');if(text.length>5000)throw Error('حداکثر متن ۵۰۰۰ نویسه است.');$('generate').disabled=true;await tts(text,null,+$('exaggeration').value,+$('cfg').value,'ttsStatus','aiPlayer','downloadAi')}catch(e){$('ttsStatus').textContent=e.message}finally{$('generate').disabled=false}};
+async function transcribe(file){if(file.size>25*1024*1024)throw Error('حداکثر حجم فایل ورودی ۲۵ مگابایت است.');let form=new FormData();form.append('audio',file,file.name);form.append('language','fa');let r=await apiFetch(API+'/api/stt/transcribe',{method:'POST',headers:auth(),body:form});let j=await r.json();if(!j.success||!j.text)throw Error('متن از فایل صوتی استخراج نشد.');return j.text}
+$('clone').onclick=async()=>{try{let source=$('sourceAudio').files[0],ref=$('referenceAudio').files[0]||source;if(!source)throw Error('فایل گفتار اصلی را انتخاب کن.');if(!ref)throw Error('نمونه صدای مرجع را انتخاب کن.');$('clone').disabled=true;$('cloneStatus').textContent='۱ از ۲: در حال تبدیل گفتار به متن فارسی...';let text=await transcribe(source);$('cloneStatus').textContent='متن شناسایی‌شده:\n'+text+'\n\n۲ از ۲: در حال بازتولید با صدای مرجع...';let wav=await fileToWavBase64(ref);await tts(text,wav,+$('cloneEx').value,.5,'cloneStatus','clonePlayer','downloadClone')}catch(e){$('cloneStatus').textContent=e.message}finally{$('clone').disabled=false}};
+
+// Direct microphone recording; audio stays in this browser unless the user chooses an online feature.
+let mediaRecorder=null, micStream=null, recChunks=[], recordedBlob=null, recordedWav=null;
+$('recStart').onclick=async()=>{try{if(!navigator.mediaDevices?.getUserMedia)throw Error('ضبط میکروفون در این مرورگر در دسترس نیست؛ صفحه را با HTTPS باز کن و از مرورگر به‌روز استفاده کن.');micStream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});recChunks=[];let mime=['audio/webm;codecs=opus','audio/webm','audio/mp4'].find(x=>MediaRecorder.isTypeSupported(x));mediaRecorder=new MediaRecorder(micStream,mime?{mimeType:mime}:undefined);mediaRecorder.ondataavailable=e=>{if(e.data.size)recChunks.push(e.data)};mediaRecorder.onstop=async()=>{try{recordedBlob=new Blob(recChunks,{type:mediaRecorder.mimeType||'audio/webm'});let url=URL.createObjectURL(recordedBlob);$('recPlayer').src=url;$('recPlayer').classList.remove('hidden');let ac=new(window.AudioContext||window.webkitAudioContext)();let decoded=await ac.decodeAudioData(await recordedBlob.arrayBuffer());buffer=decoded;recordedWav=wavBlob(decoded);await ac.close();$('localInfo').textContent='ضبط مستقیم آماده پردازش است · '+fa(decoded.duration.toFixed(1))+' ثانیه';$('lplay').disabled=false;$('lexport').disabled=false;$('recSave').disabled=false;$('lstatus').textContent='صدای ضبط‌شده انتخاب شد؛ حالا پروفایل یا تنظیمات دلخواه را اعمال کن.';$('recStatus').textContent='ضبط پایان یافت؛ صدای خام آماده پخش و ذخیره است.'}catch(err){$('recStatus').textContent='خطا در آماده‌سازی ضبط: '+err.message}finally{micStream?.getTracks().forEach(t=>t.stop());micStream=null}};mediaRecorder.start();$('recStart').disabled=true;$('recStop').disabled=false;$('recStatus').textContent='در حال ضبط... صحبت کن.'}catch(e){$('recStatus').textContent=e.message}};
+$('recStop').onclick=()=>{if(mediaRecorder&&mediaRecorder.state!=='inactive'){mediaRecorder.stop();$('recStop').disabled=true;$('recStart').disabled=false;$('recStatus').textContent='در حال آماده‌سازی فایل ضبط‌شده...'}};
+$('recSave').onclick=()=>{if(!recordedWav)return;let u=URL.createObjectURL(recordedWav),a=document.createElement('a');a.href=u;a.download='sedaye-man-original.wav';a.click();setTimeout(()=>URL.revokeObjectURL(u),1500)};
+
+// Local offline DSP: pitch/speed, EQ, compression, echo, reverb and WAV export
+let buffer=null, currentUrl=null, playback=null;
+$('localFile').onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let c=new(window.AudioContext||window.webkitAudioContext)();buffer=await c.decodeAudioData((await f.arrayBuffer()).slice(0));await c.close();$('localInfo').textContent='فایل آماده است · '+fa(buffer.duration.toFixed(1))+' ثانیه';$('lplay').disabled=false;$('lexport').disabled=false;$('lstatus').textContent='آماده پردازش محلی.'}catch(err){$('localInfo').textContent='فرمت فایل پشتیبانی نشد.'}};
+const controls=[['lpitch','lpitchv',v=>fa(v)+' نیم‌پرده'],['lspeed','lspeedv',v=>fa((+v).toFixed(2))+'×'],['lbass','lbassv',v=>fa(v)+' dB'],['lpresence','lpresencev',v=>fa(v)+' dB'],['ltreble','ltreblev',v=>fa(v)+' dB'],['lecho','lechov',v=>fa(v)+'٪'],['lreverb','lreverbv',v=>fa(v)+'٪'],['ldrive','ldrivev',v=>fa(v)+'٪']];
+controls.forEach(([id,out,fmt])=>$(id).oninput=()=>$(out).textContent=fmt($(id).value));
+const profiles={neutral:{p:0,s:1,b:0,m:0,t:0,e:0,r:0,c:0},news:{p:-.5,s:.98,b:1,m:4,t:2,e:0,r:2,c:35},doc:{p:-1,s:.94,b:4,m:2,t:0,e:8,r:22,c:28},warm:{p:-.5,s:.96,b:5,m:1,t:-2,e:4,r:12,c:18},bright:{p:.5,s:1.03,b:-1,m:5,t:4,e:0,r:4,c:24},cinema:{p:-1.5,s:.92,b:5,m:1,t:1,e:15,r:42,c:32}};
+function applyProfile(k){let v=profiles[k];for(let [id,val] of [['lpitch',v.p],['lspeed',v.s],['lbass',v.b],['lpresence',v.m],['ltreble',v.t],['lecho',v.e],['lreverb',v.r],['ldrive',v.c]])$(id).value=val;controls.forEach(([id,out,fmt])=>$(out).textContent=fmt($(id).value));document.querySelectorAll('#localPresets .preset').forEach(b=>b.classList.toggle('sel',b.dataset.preset===k))}
+document.querySelectorAll('#localPresets .preset').forEach(b=>b.onclick=()=>applyProfile(b.dataset.preset));
+function stopLocal(){if(playback){playback.pause();playback=null}$('lstop').disabled=true}
+function wavBlob(ab){let n=ab.length,channels=ab.numberOfChannels,sr=ab.sampleRate,bytes= new ArrayBuffer(44+n*channels*2),v=new DataView(bytes),pos=0;const w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};w(0,'RIFF');v.setUint32(4,36+n*channels*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,channels,true);v.setUint32(24,sr,true);v.setUint32(28,sr*channels*2,true);v.setUint16(32,channels*2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*channels*2,true);for(let i=0;i<n;i++)for(let c=0;c<channels;c++){let x=Math.max(-1,Math.min(1,ab.getChannelData(c)[i]));v.setInt16(44+pos,x<0?x*32768:x*32767,true);pos+=2}return new Blob([bytes],{type:'audio/wav'})}
+async function renderLocal(){if(!buffer)throw Error('ابتدا فایل صوتی انتخاب کن.');let pitch=Math.pow(2,(+$('lpitch').value)/12),rate=pitch*(+$('lspeed').value),duration=buffer.duration/rate+2, sr=buffer.sampleRate, off=new OfflineAudioContext(buffer.numberOfChannels,Math.ceil(duration*sr),sr),src=off.createBufferSource();src.buffer=buffer;src.playbackRate.value=rate;
+let bass=off.createBiquadFilter();bass.type='lowshelf';bass.frequency.value=180;bass.gain.value=+$('lbass').value;
+let presence=off.createBiquadFilter();presence.type='peaking';presence.frequency.value=2800;presence.Q.value=.8;presence.gain.value=+$('lpresence').value;
+let treble=off.createBiquadFilter();treble.type='highshelf';treble.frequency.value=6500;treble.gain.value=+$('ltreble').value;
+let comp=off.createDynamicsCompressor();comp.threshold.value=-24;comp.knee.value=18;comp.ratio.value=1+(+$('ldrive').value)/12;comp.attack.value=.008;comp.release.value=.18;
+let dry=off.createGain();dry.gain.value=1-(+$('lecho').value)/180-(+$('lreverb').value)/250;
+let sum=off.createGain();src.connect(bass);bass.connect(presence);presence.connect(treble);treble.connect(comp);comp.connect(dry);dry.connect(sum);
+let echo=off.createDelay(1);echo.delayTime.value=.19;let fb=off.createGain();fb.gain.value=.16;let ew=off.createGain();ew.gain.value=(+$('lecho').value)/100;comp.connect(echo);echo.connect(fb);fb.connect(echo);echo.connect(ew);ew.connect(sum);
+let con=off.createConvolver(),ir=off.createBuffer(2,sr*2,sr);for(let c=0;c<2;c++){let d=ir.getChannelData(c);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3)}con.buffer=ir;let rw=off.createGain();rw.gain.value=(+$('lreverb').value)/100;comp.connect(con);con.connect(rw);rw.connect(sum);sum.connect(off.destination);src.start();return await off.startRendering()}
+async function localRun(exporting){try{stopLocal();$('lstatus').textContent='در حال پردازش آفلاین...';$('lplay').disabled=true;$('lexport').disabled=true;let rendered=await renderLocal(),blob=wavBlob(rendered);if(currentUrl)URL.revokeObjectURL(currentUrl);currentUrl=URL.createObjectURL(blob);if(exporting){let a=document.createElement('a');a.href=currentUrl;a.download='sedaye-man-processed.wav';a.click();$('lstatus').textContent='فایل WAV پردازش‌شده آماده و ذخیره شد.'}else{$('lplayer').src=currentUrl;$('lplayer').classList.remove('hidden');playback=$('lplayer');playback.onended=()=>{$('lstop').disabled=true;playback=null};await playback.play();$('lstatus').textContent='پخش نسخه پردازش‌شده؛ برای تغییر نتیجه، تنظیمات را عوض کن و دوباره پخش بزن.'}$('lstop').disabled=false}catch(e){$('lstatus').textContent=e.message}finally{$('lplay').disabled=!buffer;$('lexport').disabled=!buffer}}
+$('lplay').onclick=()=>localRun(false);$('lexport').onclick=()=>localRun(true);$('lstop').onclick=()=>{stopLocal();$('lstatus').textContent='پخش متوقف شد.'};
+})();
+</script></body></html>
